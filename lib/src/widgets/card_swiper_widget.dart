@@ -6,9 +6,9 @@ import 'package:peliculas/src/models/pelicula_model.dart';
 
 class CardSwiper extends StatelessWidget {
   
-  final List<Pelicula> peliculas;
+  final List<Pelicula>? peliculas;
   
-  CardSwiper({ @required this.peliculas });
+  CardSwiper({ required this.peliculas });
 
   
   @override
@@ -24,16 +24,16 @@ class CardSwiper extends StatelessWidget {
           itemHeight: _screenSize.height * 0.5,
           itemBuilder: (BuildContext context, int index){
 
-            peliculas[index].uniqueId = '${ peliculas[index].id }-tarjeta';
+            peliculas![index].uniqueId = '${ peliculas![index].id }-tarjeta';
 
             return Hero(
-              tag: peliculas[index].uniqueId,
+              tag: peliculas![index].uniqueId,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
                 child: GestureDetector(
-                  onTap: ()=> Navigator.pushNamed(context, 'detalle', arguments: peliculas[index]),
+                  onTap: ()=> Navigator.pushNamed(context, 'detalle', arguments: peliculas![index]),
                   child: FadeInImage(
-                    image: NetworkImage( peliculas[index].getPosterImg()  ),
+                    image: NetworkImage( peliculas![index].getPosterImg()  ),
                     placeholder: AssetImage('assets/img/no-image.jpg'),
                     fit: BoxFit.cover,
                   ),
@@ -42,7 +42,7 @@ class CardSwiper extends StatelessWidget {
             );
             
           },
-          itemCount: peliculas.length,
+          itemCount: peliculas!.length,
           // pagination: new SwiperPagination(),
           // control: new SwiperControl(),
       ),

@@ -11,7 +11,7 @@ class PeliculaDetalle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
+    final Pelicula pelicula = ModalRoute.of(context)!.settings.arguments as Pelicula;
 
 
     return Scaffold(
@@ -48,7 +48,7 @@ class PeliculaDetalle extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         title: Text(
-          pelicula.title,
+          pelicula.title!,
           style: TextStyle(color: Colors.white, fontSize: 16.0),
         ),
         background: FadeInImage(
@@ -83,8 +83,8 @@ class PeliculaDetalle extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(pelicula.title, style: Theme.of(context).textTheme.headline4, overflow: TextOverflow.clip ),
-                Text(pelicula.originalTitle, style: Theme.of(context).textTheme.subtitle2, overflow: TextOverflow.ellipsis ),
+                Text(pelicula.title!, style: Theme.of(context).textTheme.headline4, overflow: TextOverflow.clip ),
+                Text(pelicula.originalTitle!, style: Theme.of(context).textTheme.subtitle2, overflow: TextOverflow.ellipsis ),
                 Row(
                   children: <Widget>[
                     Icon( Icons.star_border ),
@@ -106,7 +106,7 @@ class PeliculaDetalle extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
       child: Text(
-        pelicula.overview,
+        pelicula.overview!,
         textAlign: TextAlign.justify,
       ),
     );
@@ -123,7 +123,7 @@ class PeliculaDetalle extends StatelessWidget {
       builder: (context, AsyncSnapshot<List> snapshot) {
         
         if( snapshot.hasData ) {
-          return _crearActoresPageView( snapshot.data );
+          return _crearActoresPageView( snapshot.data as List<Actor> );
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -164,7 +164,7 @@ class PeliculaDetalle extends StatelessWidget {
             ),
           ),
           Text(
-            actor.name,
+            actor.name!,
             overflow: TextOverflow.ellipsis,
           )
         ],

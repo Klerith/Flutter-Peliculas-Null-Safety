@@ -4,10 +4,10 @@ import 'package:peliculas/src/models/pelicula_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
 
-  final List<Pelicula> peliculas;
+  final List<Pelicula>? peliculas;
   final Function siguientePagina;
 
-  MovieHorizontal({ @required this.peliculas, @required this.siguientePagina });
+  MovieHorizontal({ required this.peliculas, required this.siguientePagina });
 
   final _pageController = new PageController(
     initialPage: 1,
@@ -35,8 +35,8 @@ class MovieHorizontal extends StatelessWidget {
         pageSnapping: false,
         controller: _pageController,
         // children: _tarjetas(context),
-        itemCount: peliculas.length,
-        itemBuilder: ( context, i ) => _tarjeta(context, peliculas[i] ),
+        itemCount: peliculas!.length,
+        itemBuilder: ( context, i ) => _tarjeta(context, peliculas![i] ),
       ),
     );
 
@@ -65,7 +65,7 @@ class MovieHorizontal extends StatelessWidget {
             ),
             SizedBox(height: 5.0),
             Text(
-              pelicula.title,
+              pelicula.title!,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.caption,
             )
