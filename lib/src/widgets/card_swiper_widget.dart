@@ -6,7 +6,7 @@ import 'package:peliculas/src/models/pelicula_model.dart';
 
 class CardSwiper extends StatelessWidget {
   
-  final List<Pelicula>? peliculas;
+  final List<Pelicula> peliculas;
   
   CardSwiper({ required this.peliculas });
 
@@ -15,8 +15,14 @@ class CardSwiper extends StatelessWidget {
   Widget build(BuildContext context) {
     
     // peliculas![index].uniqueId = '${ peliculas![index].id }-tarjeta';
-    // ()=> Navigator.pushNamed(context, 'detalle', arguments: peliculas![index]),
-    return 
+    return CarouselSlider.builder(
+      itemCount: this.peliculas.length,
+      itemBuilder: (context, index, realIndex) => MoviePosterImage(pelicula: this.peliculas[index]), 
+      options: CarouselOptions(
+        autoPlay: true,
+        aspectRatio: 2.0,
+        enlargeCenterPage: true
+      ));
 
   }
 }
@@ -33,10 +39,18 @@ class MoviePosterImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeInImage(
-      image: NetworkImage( pelicula.getPosterImg()  ),
-      placeholder: AssetImage('assets/img/no-image.jpg'),
-      fit: BoxFit.cover,
+
+    return GestureDetector(
+      onTap: ()=> Navigator.pushNamed(context, 'detalle', arguments: pelicula ),
+      child: Hero(
+        tag: pelicula.uniqueIdBanner,
+        child: FadeInImage(
+          // image: NetworkImage( pelicula.getPosterImg()  ),
+          image: NetworkImage( pelicula.getBackgroundImg()  ),
+          placeholder: AssetImage('assets/img/loading.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }
