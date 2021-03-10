@@ -17,7 +17,7 @@ class PeliculasProvider {
   int _popularesPage = 0;
   bool _cargando     = false;
 
-  List<Pelicula> _populares = new List();
+  List<Pelicula> _populares = [];
 
   final _popularesStreamController = StreamController<List<Pelicula>>.broadcast();
 
@@ -28,7 +28,7 @@ class PeliculasProvider {
 
 
   void disposeStreams() {
-    _popularesStreamController?.close();
+    _popularesStreamController.close();
   }
 
 
